@@ -1,13 +1,10 @@
 package woojjam.advanced.trace.logtrace;
 
-import org.springframework.context.annotation.Configuration;
-
 import lombok.extern.slf4j.Slf4j;
 import woojjam.advanced.trace.TraceId;
 import woojjam.advanced.trace.TraceStatus;
 
 @Slf4j
-@Configuration
 public class FilterLogTrace implements LogTrace  {
 
 	private static final String START_PREFIX = "-->";
