@@ -3,33 +3,33 @@ package woojjam.advanced.trace.threadlocal;
 import org.junit.jupiter.api.Test;
 
 import lombok.extern.slf4j.Slf4j;
-import woojjam.advanced.trace.threadlocal.code.FieldService;
+import woojjam.advanced.trace.threadlocal.code.ThreadLocalService;
 
 @Slf4j
-public class FieldServiceTest {
+public class ThreadLocalServiceTest {
 
-	private FieldService service = new FieldService();
+	private ThreadLocalService service = new ThreadLocalService();
 
 	@Test
 	public void field() throws Exception {
-	    log.info("main start");
+		log.info("main start");
 		Runnable userA = () -> {
 			service.logic("userA");
 		};
-		
+
 		Runnable userB = () -> {
-            service.logic("userB");
-        };
+			service.logic("userB");
+		};
 
 		Thread threadA = new Thread(userA);
 		threadA.setName("thread-A");
-		
+
 		Thread threadB = new Thread(userB);
 		threadB.setName("thread-B");
-		
+
 		threadA.start();
 		// sleep(2000); // 동시성 문제 발생 X
-		// sleep(100); // 동시성 문제 발생 O
+		sleep(100); // 동시성 문제 발생 O
 		threadB.start();
 
 		sleep(2000);
@@ -38,9 +38,9 @@ public class FieldServiceTest {
 
 	private void sleep(int mills) {
 		try {
-            Thread.sleep(mills);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+			Thread.sleep(mills);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 }
